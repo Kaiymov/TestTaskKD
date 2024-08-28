@@ -1,18 +1,21 @@
 from pathlib import Path
+from dotenv import load_dotenv
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*wead_2fo2ju5v7t$8dz7$ehojs+-od*9p@%b^el%81fpp824@'
-TELEGRAM_TOKEN = '7535741925:AAELPVWSywWxrShTexWmnA0GzEoRe6Y3I2M'
+SECRET_KEY = os.getenv('SECRET_KEY')
+TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG=1
 
 AUTH_USER_MODEL = 'account_api.CustomUser'
 

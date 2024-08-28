@@ -13,7 +13,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['id', 'text', 'date_published', 'author', 'avarage_rating']
+        fields = '__all__'
         read_only_fields = ['date_published', 'author', 'avarage_rating']
 
     def get_avarage_rating(self, obj):

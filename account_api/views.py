@@ -15,6 +15,7 @@ class UsersView(generics.ListAPIView):
 class PostListView(generics.ListAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    permission_classes = [AllowAny,]
 
 
 class PostAddView(generics.CreateAPIView):
@@ -83,10 +84,10 @@ class RatingAddView(generics.CreateAPIView):
         post = generics.get_object_or_404(Post, id=self.kwargs['post_id'])
         user = self.request.user
 
-        if Rating.objects.filter(post=post, user=user).exists():
+        if Rating.objects.filter(post=post, author=user).exists():
             raise serializers.ValidationError('You have already rated this post.')
 
-        serializer.save(user=user, post=post)
+        serializer.save(author=user, post=post)
 
 
 class RatingDeleteUpdateView(generics.RetrieveUpdateDestroyAPIView):
